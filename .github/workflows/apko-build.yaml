@@ -51,7 +51,7 @@ jobs:
       uses: actions/attest-build-provenance@bd77c077858b8d561b7a36cbe48ef4cc642ca39d # v2.2.2
       with:
         subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-        subject-digest: ${{ steps.extract-digest.outputs.digest }}
+        subject-digest: ${{ env.digest }}
         push-to-registry: true
     
     - name: Sign the image
