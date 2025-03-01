@@ -1,12 +1,9 @@
 name: Build Docker Image
 
-on:
+on: 
   push:
-    branches:
-      - main
-    paths:
-      - 'wolfi-dotnet-runtime-deps.yaml'
-  workflow_dispatch:
+  schedule:
+    - cron: '15 3 * * *'
 jobs:
   build:
     runs-on: ubuntu-24.04
