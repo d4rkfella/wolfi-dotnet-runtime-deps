@@ -40,10 +40,22 @@ pipeline:
   - name: Verify PGP signature
     runs: |
       gpg --verify catatonit.tar.xz.asc catatonit.tar.xz
-  - name: 'Configure catatonit'
+  - name: Autoconf
     runs: |
-      ./autogen.sh
-      ./configure
-  - uses: autoconf/make
-  - uses: autoconf/make-install
-  - uses: strip
+      autoreconf -fiv
+  - name: Configure
+    runs: |
+      ./configure --prefix=/usr
+  - name: Build
+    runs: |
+      make
+  - name: Install
+    runs: |
+      make install DESTDIR=${WORKDIR}
+  - name: Strip binaries
+    runs: |
+      find ${WORKDIR} -type f -executable -exec strip {} \;
+  - name: Add LICENSE file
+    runs: |
+      mkdir -p ${WORKDIR}/usr/share/licenses/catatonit
+      echo "This package is licensed under the GNU General Public License v2.0 or later." > ${WORKDIR}/usr/share/licenses/catatonit/LICENSE
