@@ -39,9 +39,17 @@ jobs:
         config: wolfi-dotnet-runtime-deps.yaml
         tag: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:1.0.0
 
-    - name: Debug apko output
+    - name: Extract digest
       run: |
-        echo "Digest: ${{ steps.apko.outputs.digest }}"
+        DIGEST=$(echo "${{ steps.apko.outputs.digest }}" | awk -F@ '{print $2}') >> $GITHUB_ENV
+
+    - name: Attest
+      uses: actions/attest-build-provenance@bd77c077858b8d561b7a36cbe48ef4cc642ca39d # v2.2.2
+      id: attest
+      with:
+        subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+        subject-digest: ${{ env.DIGEST }}
+        push-to-registry: true
 
     - name: Sign the image
       run: |
