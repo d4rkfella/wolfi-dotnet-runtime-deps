@@ -39,13 +39,25 @@ pipeline:
 
   - uses: strip
 
-  - name: Clean up intermediate files
-    runs: |
-      find ${WORKDIR} -name "*.o" -delete
+subpackages:
+  - range: libraries
+    name: ${{range.key}}
+    description: "${{range.value}} library"
+    pipeline:
+      - runs: |
+          mkdir -p "${{targets.subpkgdir}}"/usr/lib
+          mv "${{targets.destdir}}"/usr/lib/${{range.value}}* "${{targets.subpkgdir}}"/usr/lib/
 
-  - name: Clean up /var/empty
-    runs: |
-      rm -rf ${WORKDIR}/var/empty/*
+  - name: catatonit-dev
+    dependencies:
+      runtime:
+        - catatonit
+    pipeline:
+      - uses: split/dev
+    description: catatonit development headers
+    test:
+      pipeline:
+        - uses: test/pkgconf
 
 update:
   enabled: true
