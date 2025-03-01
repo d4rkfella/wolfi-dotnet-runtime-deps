@@ -29,7 +29,7 @@ jobs:
         uses: docker/setup-qemu-action@v3
 
       - name: Set up Melange
-        uses: chainguard-dev/melange-action@main
+        uses: chainguard-dev/actions/melange-build@main
         with:
           melange-version: latest
           
@@ -45,6 +45,12 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: ghcr.io
+      
+      - name: Setup Homebrew
+        uses: Homebrew/actions/setup-homebrew@a13eda877cb779461da1de25f0991398d655b35c
+
+      - name: Install Melange
+        run: brew install melange
       
       - name: Update melange.yaml
         run: |
