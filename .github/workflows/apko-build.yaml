@@ -39,6 +39,10 @@ jobs:
         config: wolfi-dotnet-runtime-deps.yaml
         tag: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:1.0.0
 
+    - name: Debug apko output
+      run: |
+        echo "Digest: ${{ steps.apko.outputs.digest }}"
+
     - name: Sign the image
       run: |
         cosign sign --yes \
