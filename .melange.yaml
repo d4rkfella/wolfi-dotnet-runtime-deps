@@ -3,7 +3,7 @@ package:
   version: v0.2.1
   description: minimal init system for Linux containers
   target-architecture:
-    - x86_64
+    - all
   copyright:
     - license: GNU General Public License version 2
 
