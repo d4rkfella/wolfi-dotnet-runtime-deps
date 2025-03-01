@@ -28,6 +28,11 @@ pipeline:
       repository: https://github.com/openSUSE/catatonit
       expected-commit: bb3b96b99668e544618c5aec427c1f4b6b9ee9bb
       tag: v${{package.version}}
+  
+  - name: Fix permissions
+    runs: |
+      chmod -R u+rwX .
+      chmod -R go+rX .
  
   - runs: |
       autoreconf -fiv
