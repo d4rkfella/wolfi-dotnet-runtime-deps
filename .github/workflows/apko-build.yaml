@@ -44,7 +44,8 @@ jobs:
 
     - name: Build PKG
       run: |
-        melange build --runner=docker .melange.yaml
+        melange keygen
+        melange build --runner=docker --signing-key melange.rsa .melange.yaml
 
     - uses: distroless/actions/apko-publish@main
       id: apko
