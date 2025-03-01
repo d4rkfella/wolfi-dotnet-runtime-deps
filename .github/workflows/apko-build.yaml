@@ -33,6 +33,16 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
         registry: ghcr.io
 
+    - name: Setup Homebrew
+      uses: Homebrew/actions/setup-homebrew@a13eda877cb779461da1de25f0991398d655b35c
+
+    - name: Install Melange
+      run: brew install melange
+
+    - name: Build PKG
+      run: |
+        melange build .melange.yaml
+
     - uses: distroless/actions/apko-publish@main
       id: apko
       with:
