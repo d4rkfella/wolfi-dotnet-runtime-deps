@@ -45,7 +45,7 @@ jobs:
           sign-with-temporary-key: true
           empty-workspace: true
   
-      - uses: chainguard-dev/actions/apko-build@main
+      - uses: distroless/actions/apko-publish@main
         id: apko
         with:
           keyring-append: /github/workspace/melange.rsa.pub
