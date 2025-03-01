@@ -43,8 +43,3 @@ update:
   enabled: true
   release-monitor:
     identifier: 301804
-
-test:
-  pipeline:
-    - runs: |
-        catatonit --version
