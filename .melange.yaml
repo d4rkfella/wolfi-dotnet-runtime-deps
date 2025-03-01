@@ -54,8 +54,4 @@ pipeline:
       make install DESTDIR=${WORKDIR}
   - name: Strip binaries
     runs: |
-      find ${WORKDIR} -type f -executable -exec strip {} \;
-  - name: Add LICENSE file
-    runs: |
-      mkdir -p ${WORKDIR}/usr/share/licenses/catatonit
-      echo "This package is licensed under the GNU General Public License v2.0 or later." > ${WORKDIR}/usr/share/licenses/catatonit/LICENSE
+      find ${WORKDIR} -type f -executable -exec sh -c 'file -b "{}" | grep -q "ELF"' \; -exec strip {} \;
