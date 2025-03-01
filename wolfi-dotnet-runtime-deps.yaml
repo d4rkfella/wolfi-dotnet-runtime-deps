@@ -4,7 +4,7 @@ contents:
     - ./melange.rsa.pub
   repositories:
     - https://packages.wolfi.dev/os
-    - '@local /packages'
+    - '@local /home/packages'
   packages:
     - ca-certificates-bundle
     - wolfi-baselayout
@@ -13,7 +13,7 @@ contents:
     - sqlite-libs
     - libssl3
     - zlib
-    - catatonit-v0.2.1-r0@local
+    - catatonit@local
 
 environment:
   PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
