@@ -21,6 +21,13 @@ jobs:
     - name: Set up Cosign
       uses: sigstore/cosign-installer@d7d6bc7722e3daa8354c50bcb52f4837da5e9b6a # v3.8.1
 
+    - name: Log in to GitHub Container Registry (GHCR)
+      uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567 #v3.3.0
+      with:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        registry: ghcr.io
+
     - uses: distroless/actions/apko-publish@main
       id: apko
       with:
