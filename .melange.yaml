@@ -26,7 +26,7 @@ pipeline:
   - uses: git-checkout
     with:
       repository: https://github.com/openSUSE/catatonit
-      expected-commit: 7f0c9bb45d3490c3e7f579833c9b0689f78c8923
+      expected-commit: bb3b96b99668e544618c5aec427c1f4b6b9ee9bb
       tag: v${{package.version}}
  
   - runs: |
