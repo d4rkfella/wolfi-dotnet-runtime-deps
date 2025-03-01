@@ -1,6 +1,6 @@
 package:
   name: catatonit
-  version: 0.2.0
+  version: 0.2.1
   description: minimal init system for Linux containers
   copyright:
     - license: GPL-2.0-or-later
@@ -38,20 +38,3 @@ pipeline:
   - uses: autoconf/make-install
 
   - uses: strip
-
-subpackages:
-  - name: catatonit-dev
-    dependencies:
-      runtime:
-        - catatonit
-    pipeline:
-      - uses: split/dev
-    description: catatonit development headers
-    test:
-      pipeline:
-        - uses: test/pkgconf
-
-update:
-  enabled: true
-  release-monitor:
-    identifier: 301804
