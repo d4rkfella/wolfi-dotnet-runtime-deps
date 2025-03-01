@@ -43,7 +43,7 @@ jobs:
       id: extract-digest
       run: |
         # Extract the digest from the full image reference
-        DIGEST=$(echo "${{ steps.apko.outputs.image-ref }}" | awk -F@ '{print $2}')
+        DIGEST=$(echo "${{ steps.apko.outputs.digest }}" | awk -F@ '{print $2}')
         echo "Extracted digest: $DIGEST"
         echo "digest=$DIGEST" >> $GITHUB_OUTPUT
 
