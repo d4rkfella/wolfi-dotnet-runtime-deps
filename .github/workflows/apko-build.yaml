@@ -40,11 +40,16 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: ghcr.io
       
-      - uses: chainguard-dev/actions/melange-build@main
-        with:
-          empty-workspace: false
-          sign-with-temporary-key: true
-          repository-path: /work/packages
+      - name: Setup Homebrew
+        uses: Homebrew/actions/setup-homebrew@a13eda877cb779461da1de25f0991398d655b35c
+
+      - name: Install Melange
+        run: brew install melange
+  
+      - name: Build PKG
+        run: |
+          melange keygen
+          melange build --runner=docker --signing-key --arch amd64 melange.rsa .melange.yaml
 
       - uses: distroless/actions/apko-publish@main
         id: apko
