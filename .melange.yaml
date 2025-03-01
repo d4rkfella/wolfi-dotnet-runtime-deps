@@ -22,6 +22,7 @@ environment:
       - gpg-agent
       - gnupg-dirmngr
       - curl
+      - automake
       - autoconf
 
 pipeline:
