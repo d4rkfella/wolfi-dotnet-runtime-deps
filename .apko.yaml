@@ -3,7 +3,7 @@ contents:
     - https://packages.wolfi.dev/os/wolfi-signing.rsa.pub
   repositories:
     - https://packages.wolfi.dev/os
-    - ./packages
+    - '@local ./packages'
   packages:
     - ca-certificates-bundle
     - wolfi-baselayout
@@ -12,7 +12,7 @@ contents:
     - sqlite-libs
     - libssl3
     - zlib
-    - catatonit
+    - catatonit@local
 
 environment:
   PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
