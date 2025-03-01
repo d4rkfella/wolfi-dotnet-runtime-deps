@@ -43,7 +43,7 @@ jobs:
       - uses: chainguard-dev/actions/melange-build@main
         with:
           sign-with-temporary-key: true
-          empty-workspace: true
+          empty-workspace: false
   
       - uses: distroless/actions/apko-publish@main
         id: apko
