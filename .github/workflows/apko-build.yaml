@@ -40,8 +40,9 @@ jobs:
         tag: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:1.0.0
 
     - name: Extract digest
+      shell: bash
       run: |
-        DIGEST=$(echo "${{ steps.apko.outputs.digest }}" | awk -F@ '{print $2}') >> $GITHUB_ENV
+        echo DIGEST=$(echo "${{ steps.apko.outputs.digest }}" | awk -F@ '{print $2}') >> $GITHUB_ENV
 
     - name: Attest
       uses: actions/attest-build-provenance@bd77c077858b8d561b7a36cbe48ef4cc642ca39d # v2.2.2
