@@ -24,6 +24,9 @@ environment:
       - curl
       - automake
       - autoconf
+      - gettext
+      - libtool
+      - intltool
 
 pipeline:
   - name: Download catatonit source tarball
