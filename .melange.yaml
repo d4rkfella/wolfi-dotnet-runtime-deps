@@ -3,7 +3,7 @@ package:
   version: 0.2.1
   description: minimal init system for Linux containers
   copyright:
-    - license: GPL-2.0-or-later
+    - license: GPL-3.0-or-later
 
 environment:
   contents:
@@ -40,18 +40,9 @@ pipeline:
   - name: Verify PGP signature
     runs: |
       gpg --verify catatonit.tar.xz.asc catatonit.tar.xz
-  - name: Autoconf
-    runs: |
-      autoreconf -fiv
-  - name: Configure
-    runs: |
-      ./configure --prefix=/usr
   - name: Build
     runs: |
+      autoreconf -fiv
+      configure --prefix=/usr
       make
-  - name: Install
-    runs: |
-      make install DESTDIR=${WORKDIR}
-  - name: Strip binaries
-    runs: |
-      find ${WORKDIR} -type f -executable -exec sh -c 'file -b "{}" | grep -q "ELF"' \; -exec strip {} \;
+      make install-strip
