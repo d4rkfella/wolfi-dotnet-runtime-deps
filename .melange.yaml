@@ -3,7 +3,7 @@ package:
   version: v0.2.1
   description: minimal init system for Linux containers
   target-architecture:
-    - all
+    - x86_64
   copyright:
     - license: GNU General Public License version 2
 
@@ -27,18 +27,16 @@ pipeline:
     uses: fetch
     with:
       uri: https://github.com/openSUSE/${{package.name}}/releases/download/${{package.version}}/catatonit.tar.xz
-      dest: ${{package.name}}-${{package.version}}.tar.xz
   - name: Download catatonit PGP signature
     uses: fetch
     with:
       uri: https://github.com/openSUSE/${{package.name}}/releases/download/${{package.version}}/catatonit.tar.xz.asc
-      dest: ${{package.name}}-${{package.version}}.tar.xz.asc
   - name: Import PGP public key
     runs: |
       gpg --keyserver keyserver.ubuntu.com --recv-keys 5F36C6C61B5460124A75F5A69E18AA267DDB8DB4
   - name: Verify PGP signature
     runs: |
-      gpg --verify ${{package.name}}-${{package.version}}.tar.xz.asc ${{package.name}}-${{package.version}}.tar.xz
+      gpg --verify catatonit.tar.xz.asc catatonit.tar.xz
   - name: 'Configure catatonit'
     runs: |
       ./autogen.sh
