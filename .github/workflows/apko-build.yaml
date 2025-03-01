@@ -54,7 +54,7 @@ jobs:
       - uses: distroless/actions/apko-publish@main
         id: apko
         with:
-          keyring-append: /home/runner/work/wolfi-dotnet-runtime-deps/wolfi-dotnet-runtime-deps/melange.rsa.pub
+          keyring-append: ./melange.rsa.pub
           source-date-epoch: ${{ steps.snapshot-date.outputs.epoch }}
           tag: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:1.0.0
   
