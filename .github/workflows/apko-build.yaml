@@ -42,14 +42,14 @@ jobs:
       
       - uses: chainguard-dev/actions/melange-build@main
         with:
-          empty-workspace: false
+          empty-workspace: true
           sign-with-temporary-key: true
           repository-path: /work/packages
 
       - uses: distroless/actions/apko-publish@main
         id: apko
         with:
-          keyring-append: /work/melange.rsa.pub
+          keyring-append: /home/runner/work/wolfi-dotnet-runtime-deps/wolfi-dotnet-runtime-deps/melange.rsa.pub
           source-date-epoch: ${{ steps.snapshot-date.outputs.epoch }}
           tag: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:1.0.0
   
