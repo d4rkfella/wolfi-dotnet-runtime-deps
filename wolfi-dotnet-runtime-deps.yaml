@@ -9,6 +9,7 @@ contents:
     - tzdata
     - icu-libs
     - sqlite-libs
+    - libssl3
 
 environment:
   PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
