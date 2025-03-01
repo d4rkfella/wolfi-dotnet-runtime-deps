@@ -43,12 +43,12 @@ jobs:
       - uses: chainguard-dev/actions/melange-build@main
         with:
           sign-with-temporary-key: true
-          empty-workspace: false
+          empty-workspace: true
   
       - uses: distroless/actions/apko-publish@main
         id: apko
         with:
-          keyring-append: /github/workspace/melange.rsa.pub
+          keyring-append: /home/runner/work/wolfi-dotnet-runtime-deps/wolfi-dotnet-runtime-deps/melange.rsa
           source-date-epoch: ${{ steps.snapshot-date.outputs.epoch }}
           tag: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:1.0.0
   
