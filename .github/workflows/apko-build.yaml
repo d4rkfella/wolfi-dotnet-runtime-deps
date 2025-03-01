@@ -24,15 +24,7 @@ jobs:
           echo "date=$(date -u +%Y%m%d)" >> $GITHUB_OUTPUT
           echo "epoch=$(date -u +%s)" >> $GITHUB_OUTPUT
         shell: bash
-     
-      - name: Setup QEMU
-        uses: docker/setup-qemu-action@v3
-
-      - name: Set up Melange
-        uses: chainguard-dev/actions/melange-build@main
-        with:
-          melange-version: latest
-          
+            
       - name: Checkout code
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 #v4.2.2
   
