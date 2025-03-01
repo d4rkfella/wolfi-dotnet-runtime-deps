@@ -1,6 +1,6 @@
 package:
   name: catatonit
-  version: v0.2.1
+  version: 0.2.1
   description: minimal init system for Linux containers
   copyright:
     - license: GNU General Public License version 2
@@ -31,11 +31,11 @@ pipeline:
   - name: Download catatonit source tarball
     uses: fetch
     with:
-      uri: https://github.com/openSUSE/${{package.name}}/releases/download/${{package.version}}/catatonit.tar.xz
+      uri: https://github.com/openSUSE/${{package.name}}/releases/download/v${{package.version}}/catatonit.tar.xz
       expected-sha256: 9950425501af862e12f618bdc930ea755c46db6a16072a1462b4fc93b2bd59bc
   - name: Download catatonit PGP signature
     runs: |
-      curl -fsSLO "https://github.com/openSUSE/${{package.name}}/releases/download/${{package.version}}/catatonit.tar.xz.asc"
+      curl -fsSLO "https://github.com/openSUSE/${{package.name}}/releases/download/v${{package.version}}/catatonit.tar.xz.asc"
   - name: Import PGP public key
     runs: |
       gpg --keyserver keyserver.ubuntu.com --recv-keys 5F36C6C61B5460124A75F5A69E18AA267DDB8DB4
