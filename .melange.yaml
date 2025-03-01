@@ -35,7 +35,12 @@ pipeline:
       
   - uses: autoconf/make
 
-  - uses: autoconf/make-install
+  - runs: |
+      make install DESTDIR=${WORKDIR}
+
+  - name: Clean up intermediate files
+    runs: |
+      find ${WORKDIR} -name "*.o" -delete
 
   - uses: strip
 
