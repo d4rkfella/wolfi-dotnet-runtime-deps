@@ -43,10 +43,6 @@ jobs:
 
       - name: Install Melange
         run: brew install melange
-      
-      - name: Update melange.yaml
-        run: |
-          melange update .melange.yaml
 
       - name: Build PKG
         run: |
