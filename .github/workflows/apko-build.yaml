@@ -47,17 +47,10 @@ jobs:
           signing-key-path: /work/melange.rsa
           repository-path: /work/packages
 
-      - name: Create temp copy of /work directory (used in next step)
-        shell: bash
-        run: |
-          rm -rf .apko-automount && cp -r /work .apko-automount
-  
-      - uses: chainguard-images/actions/apko-build@main
+      - uses: distroless/actions/apko-publish@main
         id: apko
         with:
           keyring-append: /work/melange.rsa.pub
-          automount-src: .apko-automount/.
-          automount-dest: /work
           source-date-epoch: ${{ steps.snapshot-date.outputs.epoch }}
           tag: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:1.0.0
   
