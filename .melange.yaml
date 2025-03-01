@@ -34,10 +34,10 @@ pipeline:
       uri: https://github.com/openSUSE/${{package.name}}/releases/download/${{package.version}}/catatonit.tar.xz.asc
       dest: ${{package.name}}-${{package.version}}.tar.xz.asc
   - name: Import PGP public key
-    run: |
+    runs: |
       gpg --keyserver keyserver.ubuntu.com --recv-keys 5F36C6C61B5460124A75F5A69E18AA267DDB8DB4
   - name: Verify PGP signature
-    run: |
+    runs: |
       gpg --verify ${{package.name}}-${{package.version}}.tar.xz.asc ${{package.name}}-${{package.version}}.tar.xz
   - name: 'Configure catatonit'
     runs: |
