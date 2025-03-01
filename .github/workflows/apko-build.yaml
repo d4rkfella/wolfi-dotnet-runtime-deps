@@ -44,7 +44,6 @@ jobs:
         with:
           empty-workspace: false
           sign-with-temporary-key: true
-          signing-key-path: /work/melange.rsa
           repository-path: /work/packages
 
       - uses: distroless/actions/apko-publish@main
