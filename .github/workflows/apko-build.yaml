@@ -35,22 +35,18 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
         registry: ghcr.io
-
-    - name: Setup Homebrew
-      uses: Homebrew/actions/setup-homebrew@a13eda877cb779461da1de25f0991398d655b35c
-
-    - name: Install Melange
-      run: brew install melange
-
-    - name: Build PKG
-      run: |
-        melange keygen
-        melange build --runner=docker --signing-key melange.rsa --arch amd64 .melange.yaml
+    
+    - uses: chainguard-dev/actions/melange-build@main
+      with:
+        sign-with-temporary-key: true
+        empty-workspace: true
 
     - uses: distroless/actions/apko-publish@main
       id: apko
       with:
         config: wolfi-dotnet-runtime-deps.yaml
+        keyring-append: /github/workspace/melange.rsa.pub
+        source-date-epoch: ${{ steps.snapshot-date.outputs.epoch }}
         tag: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:1.0.0
 
     - name: Extract digest
