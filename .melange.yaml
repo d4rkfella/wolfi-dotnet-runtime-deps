@@ -35,8 +35,7 @@ pipeline:
       
   - uses: autoconf/make
 
-  - runs: |
-      make install DESTDIR=${WORKDIR}
+  - uses: autoconf/make-install
 
   - uses: strip
 
