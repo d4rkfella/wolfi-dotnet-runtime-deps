@@ -40,14 +40,6 @@ pipeline:
   - uses: strip
 
 subpackages:
-  - range: libraries
-    name: ${{range.key}}
-    description: "${{range.value}} library"
-    pipeline:
-      - runs: |
-          mkdir -p "${{targets.subpkgdir}}"/usr/lib
-          mv "${{targets.destdir}}"/usr/lib/${{range.value}}* "${{targets.subpkgdir}}"/usr/lib/
-
   - name: catatonit-dev
     dependencies:
       runtime:
