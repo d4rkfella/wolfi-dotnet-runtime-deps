@@ -10,9 +10,9 @@ contents:
     - icu-libs
     - sqlite-libs
 
-  environment:
-    PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-    SSL_CERT_FILE: /etc/ssl/certs/ca-certificates.crt
+environment:
+  PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+  SSL_CERT_FILE: /etc/ssl/certs/ca-certificates.crt
 
 archs:
   - x86_64
