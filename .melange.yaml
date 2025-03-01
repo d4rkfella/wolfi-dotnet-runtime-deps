@@ -2,8 +2,6 @@ package:
   name: catatonit
   version: v0.2.1
   description: minimal init system for Linux containers
-  target-architecture:
-    - all
   copyright:
     - license: GNU General Public License version 2
 
