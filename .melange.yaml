@@ -43,6 +43,6 @@ pipeline:
   - name: Build
     runs: |
       autoreconf -fiv
-      configure --prefix=/usr
+      ./configure --prefix=/usr
       make
       make install-strip
