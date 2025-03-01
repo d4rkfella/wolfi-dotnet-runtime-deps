@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'wolfi-dotnet-runtime-deps.yaml'
   workflow_dispatch:
 jobs:
   build:
@@ -13,6 +15,9 @@ jobs:
       packages: write
       contents: read
       attestations: write
+    env:
+      REGISTRY: ghcr.io
+      IMAGE_NAME: ${{ github.repository }}
     
     steps:
     - name: Checkout code
@@ -32,8 +37,26 @@ jobs:
       id: apko
       with:
         config: wolfi-dotnet-runtime-deps.yaml
-        tag: ghcr.io/d4rkfella/wolfi-dotnet-runtime-deps:latest ghcr.io/d4rkfella/wolfi-dotnet-runtime-deps:1.0.0
+        tag: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:1.0.0
 
-    - shell: bash
+    - name: Attest
+      uses: actions/attest-build-provenance@bd77c077858b8d561b7a36cbe48ef4cc642ca39d # v2.2.2
+      with:
+        subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+        subject-digest: ${{ steps.apko.outputs.digest }}
+        push-to-registry: true
+    
+    - name: Sign the image
       run: |
-        COSIGN_EXPERIMENTAL=true cosign sign --yes ${{ steps.apko.outputs.digest }}
+        cosign sign --yes \
+          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.apko.outputs.digest }}
+      env:
+        COSIGN_EXPERIMENTAL: 1
+
+    - name: Verify the pushed tags
+      run: |
+        cosign verify --certificate-oidc-issuer "https://token.actions.githubusercontent.com" \
+          --certificate-identity-regexp "https://github.com/d4rkfella/*" \
+          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@${{ steps.apko.outputs.digest }}
+      env:
+        COSIGN_EXPERIMENTAL: 1
