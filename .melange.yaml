@@ -38,11 +38,15 @@ pipeline:
   - runs: |
       make install DESTDIR=${WORKDIR}
 
+  - uses: strip
+
   - name: Clean up intermediate files
     runs: |
       find ${WORKDIR} -name "*.o" -delete
 
-  - uses: strip
+  - name: Clean up /var/empty
+    runs: |
+      rm -rf ${WORKDIR}/var/empty/*
 
 update:
   enabled: true
