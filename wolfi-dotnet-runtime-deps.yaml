@@ -13,7 +13,7 @@ contents:
     - sqlite-libs
     - libssl3
     - zlib
-    - catatonit@local
+    - catatonit-v0.2.1-r0@local
 
 environment:
   PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
