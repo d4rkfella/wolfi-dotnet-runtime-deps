@@ -18,7 +18,6 @@ jobs:
       - name: Generate snapshot date
         id: snapshot-date
         run: |
-          echo "date=$(date -u +%Y%m%d)" >> $GITHUB_OUTPUT
           echo "epoch=$(date -u +%s)" >> $GITHUB_OUTPUT
         shell: bash
             
