@@ -27,7 +27,6 @@ jobs:
       - uses: distroless/actions/apko-snapshot@main
         id: apko
         with:
-          keyring-append: ./melange.rsa.pub
           source-date-epoch: ${{ steps.snapshot-date.outputs.epoch }}
           additional-tags: 1.0.0
           archs: amd64
